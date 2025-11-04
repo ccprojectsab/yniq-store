@@ -1,0 +1,226 @@
+/* Subhero - Layout and Structure */
+
+.subhero-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.subhero {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Adaptive Height - uses CSS variables set inline */
+.section-subhero {
+  --min-height-mobile: 400px;
+  --min-height-desktop: 500px;
+}
+
+.subhero {
+  min-height: var(--min-height-mobile);
+}
+
+@media screen and (min-width: 750px) {
+  .subhero {
+    min-height: var(--min-height-desktop);
+  }
+}
+
+/* Media Layer */
+.subhero__media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.subhero__video,
+.subhero__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.subhero__media-video,
+.subhero__media-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Mobile/Desktop Image Switching */
+.subhero__image--mobile {
+  display: block;
+}
+
+.subhero__image--desktop {
+  display: none;
+}
+
+@media screen and (min-width: 750px) {
+  .subhero__image--mobile {
+    display: none;
+  }
+
+  .subhero__image--desktop {
+    display: block;
+  }
+}
+
+/* Gradient Overlay */
+.subhero__gradient-overlay {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Gradient Overlay - Bottom */
+.subhero__gradient-overlay--bottom {
+  bottom: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+}
+
+/* Gradient Overlay - Top */
+.subhero__gradient-overlay--top {
+  top: 0;
+  height: 60%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+}
+
+/* Gradient Overlay - Full */
+.subhero__gradient-overlay--full {
+  top: 0;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Gradient Overlay - Radial */
+.subhero__gradient-overlay--radial {
+  top: 0;
+  height: 100%;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+/* Content Layer */
+.subhero__content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.subhero__content-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Content Positioning */
+.subhero--content-top .subhero__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.subhero--content-center .subhero__content {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.subhero--content-bottom .subhero__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Text Color Options */
+.subhero__content--text-white {
+  color: #fff;
+}
+
+.subhero__content--text-white .subhero__heading,
+.subhero__content--text-white .subhero__text {
+  color: #fff;
+}
+
+.subhero__content--text-black {
+  color: #000;
+}
+
+.subhero__content--text-black .subhero__heading,
+.subhero__content--text-black .subhero__text {
+  color: #000;
+}
+
+/* Content Elements */
+.subhero__heading {
+  margin: 0 0 1rem 0;
+}
+
+.subhero__text {
+  margin: 0 0 1.5rem 0;
+}
+
+.subhero__cta {
+  margin: 0;
+}
+
+/* Carousel Specific Styles - Reuses hero carousel classes */
+.subhero-carousel-wrapper {
+  position: relative;
+}
+
+/* Responsive adjustments */
+@media screen and (min-width: 750px) {
+  .subhero__content-wrapper {
+    padding: 0 2rem;
+  }
+
+  .subhero__heading {
+    margin: 0 0 1.5rem 0;
+  }
+
+  .subhero__text {
+    margin: 0 0 2rem 0;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .subhero__content {
+    padding: 3rem 0;
+  }
+
+  .subhero__content-wrapper {
+    max-width: 1000px;
+  }
+}
+
+/* Grid and Stacked Layout Support */
+.section-subhero {
+  margin: 0;
+}
+
+/* When used in grid layouts */
+.grid .section-subhero {
+  height: 100%;
+}
+
+.grid .subhero {
+  height: 100%;
+}

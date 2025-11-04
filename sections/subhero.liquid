@@ -1,0 +1,372 @@
+{{ 'subhero.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }} {
+    --min-height-mobile: {{ section.settings.min_height_mobile }}px;
+    --min-height-desktop: {{ section.settings.min_height_desktop }}px;
+  }
+{%- endstyle -%}
+
+{%- if section.blocks.size > 1 and section.settings.enable_carousel -%}
+  <script src="{{ 'hero.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- liquid
+  assign show_carousel = false
+  if section.blocks.size > 1 and section.settings.enable_carousel
+    assign show_carousel = true
+  endif
+-%}
+
+{%- if show_carousel -%}
+  <hero-carousel
+    class="subhero-carousel"
+    data-autoplay="{{ section.settings.enable_autoplay }}"
+    data-duration="{{ section.settings.autoplay_duration }}"
+    data-pause-on-hover="{{ section.settings.pause_on_hover }}"
+  >
+{%- endif -%}
+
+<div class="subhero-wrapper{% if show_carousel %} subhero-carousel-wrapper{% endif %}">
+  {%- for block in section.blocks -%}
+    <div
+      class="subhero subhero--content-{{ section.settings.content_position }}{% if show_carousel %} hero-slide{% if forloop.first %} hero-slide--active{% endif %}{% endif %}"
+      {{ block.shopify_attributes }}
+      {% if show_carousel %}data-slide-index="{{ forloop.index0 }}"{% endif %}
+    >
+      {%- comment -%} Media Layer {%- endcomment -%}
+      <div class="subhero__media">
+        {%- if block.settings.video_url != blank -%}
+          {%- comment -%} Video {%- endcomment -%}
+          <div class="subhero__video">
+            {{
+              block.settings.video_url
+              | video_tag:
+                image_size: '1920x',
+                autoplay: true,
+                loop: true,
+                muted: true,
+                controls: false,
+                class: 'subhero__media-video'
+            }}
+          </div>
+        {%- elsif block.settings.image != blank -%}
+          {%- comment -%} Desktop Image {%- endcomment -%}
+          <div class="subhero__image subhero__image--desktop">
+            {{
+              block.settings.image
+              | image_url: width: 3840
+              | image_tag:
+                loading: 'lazy',
+                widths: '375, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+                class: 'subhero__media-image'
+            }}
+          </div>
+
+          {%- if block.settings.mobile_image != blank -%}
+            {%- comment -%} Mobile Fallback Image {%- endcomment -%}
+            <div class="subhero__image subhero__image--mobile">
+              {{
+                block.settings.mobile_image
+                | image_url: width: 1500
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '375, 750, 1100, 1500',
+                  class: 'subhero__media-image'
+              }}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- if section.settings.gradient_overlay != 'none' -%}
+          <div class="subhero__gradient-overlay subhero__gradient-overlay--{{ section.settings.gradient_overlay }}"></div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Content Layer {%- endcomment -%}
+      {%- if block.settings.heading != blank or block.settings.text != blank or block.settings.cta_text != blank -%}
+        <div class="subhero__content subhero__content--text-{{ section.settings.text_color }}">
+          <div class="subhero__content-wrapper page-width">
+            {%- if block.settings.heading != blank -%}
+              <h2 class="subhero__heading">
+                {{ block.settings.heading }}
+              </h2>
+            {%- endif -%}
+
+            {%- if block.settings.text != blank -%}
+              <div class="subhero__text">
+                {{ block.settings.text }}
+              </div>
+            {%- endif -%}
+
+            {%- if block.settings.cta_text != blank -%}
+              <div class="subhero__cta">
+                <a
+                  href="{{ block.settings.cta_link | default: '#' }}"
+                  class="button button--primary"
+                  {% if block.settings.cta_link == blank %}
+                    role="link" aria-disabled="true"
+                  {% endif %}
+                >
+                  {{ block.settings.cta_text | escape }}
+                </a>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endfor -%}
+
+  {%- if show_carousel -%}
+    {%- comment -%} Carousel Controls {%- endcomment -%}
+    {%- if section.settings.show_arrows -%}
+      <div class="hero-carousel__controls">
+        <button
+          type="button"
+          class="hero-carousel__arrow hero-carousel__arrow--prev"
+          aria-label="Previous slide"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button
+          type="button"
+          class="hero-carousel__arrow hero-carousel__arrow--next"
+          aria-label="Next slide"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_indicators -%}
+      <div class="hero-carousel__indicators">
+        {%- for block in section.blocks -%}
+          <button
+            type="button"
+            class="hero-carousel__indicator{% if forloop.first %} hero-carousel__indicator--active{% endif %}"
+            aria-label="Go to slide {{ forloop.index }}"
+            data-slide-index="{{ forloop.index0 }}"
+          ></button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{%- if show_carousel -%}
+  </hero-carousel>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Subhero",
+  "class": "section-subhero",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "min_height_desktop",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "label": "Minimum height (desktop)",
+      "default": 500,
+      "info": "Height adapts to content but won't go below this value"
+    },
+    {
+      "type": "range",
+      "id": "min_height_mobile",
+      "min": 200,
+      "max": 600,
+      "step": 50,
+      "unit": "px",
+      "label": "Minimum height (mobile)",
+      "default": 400
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "center",
+      "label": "Content position"
+    },
+    {
+      "type": "select",
+      "id": "gradient_overlay",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom (black to transparent)"
+        },
+        {
+          "value": "top",
+          "label": "Top (black to transparent)"
+        },
+        {
+          "value": "full",
+          "label": "Full (dark overlay)"
+        },
+        {
+          "value": "radial",
+          "label": "Radial (center focus)"
+        }
+      ],
+      "default": "bottom",
+      "label": "Gradient overlay",
+      "info": "Improves text readability on bright backgrounds"
+    },
+    {
+      "type": "select",
+      "id": "text_color",
+      "options": [
+        {
+          "value": "white",
+          "label": "White"
+        },
+        {
+          "value": "black",
+          "label": "Black"
+        }
+      ],
+      "default": "white",
+      "label": "Text color"
+    },
+    {
+      "type": "header",
+      "content": "Carousel"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_carousel",
+      "default": true,
+      "label": "Enable carousel",
+      "info": "Only applies when multiple blocks are added"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "default": true,
+      "label": "Enable autoplay"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_duration",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Autoplay duration",
+      "default": 6
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "default": true,
+      "label": "Pause on hover (desktop)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "default": true,
+      "label": "Show navigation arrows"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_indicators",
+      "default": true,
+      "label": "Show slide indicators (dots)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "subhero_slide",
+      "name": "Subhero Slide",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Media"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile image (optional)",
+          "info": "Fallback image for mobile devices"
+        },
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "accept": ["youtube", "vimeo"],
+          "label": "Video URL",
+          "info": "Video takes priority over image if both are provided"
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "richtext",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Body text"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "CTA text"
+        },
+        {
+          "type": "url",
+          "id": "cta_link",
+          "label": "CTA link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Subhero",
+      "blocks": [
+        {
+          "type": "subhero_slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
