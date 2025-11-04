@@ -1,0 +1,299 @@
+/* Hero - Layout and Structure */
+
+.hero-wrapper {
+  position: relative;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Section Height */
+.hero--full-viewport {
+  min-height: 100vh;
+}
+
+.hero--auto {
+  min-height: 400px;
+}
+
+/* Media Layer */
+.hero__media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero__video,
+.hero__image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero__media-video,
+.hero__media-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Mobile/Desktop Image Switching */
+.hero__image--mobile {
+  display: block;
+}
+
+.hero__image--desktop {
+  display: none;
+}
+
+@media screen and (min-width: 750px) {
+  .hero__image--mobile {
+    display: none;
+  }
+
+  .hero__image--desktop {
+    display: block;
+  }
+}
+
+/* Gradient Overlay */
+.hero__gradient-overlay {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Gradient Overlay - Bottom */
+.hero__gradient-overlay--bottom {
+  bottom: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+}
+
+/* Gradient Overlay - Top */
+.hero__gradient-overlay--top {
+  top: 0;
+  height: 60%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+}
+
+/* Gradient Overlay - Full */
+.hero__gradient-overlay--full {
+  top: 0;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Gradient Overlay - Radial */
+.hero__gradient-overlay--radial {
+  top: 0;
+  height: 100%;
+  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
+}
+
+/* Content Layer */
+.hero__content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.hero__content-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Content Positioning */
+.hero--content-top .hero__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.hero--content-center .hero__content {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.hero--content-bottom .hero__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Text Color Options */
+.hero__content--text-white {
+  color: #fff;
+}
+
+.hero__content--text-white .hero__heading,
+.hero__content--text-white .hero__text {
+  color: #fff;
+}
+
+.hero__content--text-black {
+  color: #000;
+}
+
+.hero__content--text-black .hero__heading,
+.hero__content--text-black .hero__text {
+  color: #000;
+}
+
+/* Content Elements */
+.hero__heading {
+  margin: 0 0 1rem 0;
+}
+
+.hero__text {
+  margin: 0 0 1.5rem 0;
+}
+
+.hero__cta {
+  margin: 0;
+}
+
+/* Carousel Specific Styles */
+.hero-carousel-wrapper {
+  position: relative;
+}
+
+.hero-slide {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-slide--active {
+  opacity: 1;
+  visibility: visible;
+  position: relative;
+}
+
+/* Carousel Controls */
+.hero-carousel__controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  pointer-events: none;
+}
+
+.hero-carousel__arrow {
+  pointer-events: all;
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.hero-carousel__arrow:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+.hero-carousel__arrow svg {
+  width: 24px;
+  height: 24px;
+  color: #000;
+}
+
+/* Hide arrows on mobile */
+@media screen and (max-width: 749px) {
+  .hero-carousel__controls {
+    display: none;
+  }
+}
+
+/* Carousel Indicators (Dots) */
+.hero-carousel__indicators {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.hero-carousel__indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.hero-carousel__indicator:hover {
+  background: rgba(255, 255, 255, 0.7);
+  transform: scale(1.2);
+}
+
+.hero-carousel__indicator--active {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.2);
+}
+
+/* Responsive adjustments */
+@media screen and (min-width: 750px) {
+  .hero__content-wrapper {
+    padding: 0 2rem;
+  }
+
+  .hero__heading {
+    margin: 0 0 1.5rem 0;
+  }
+
+  .hero__text {
+    margin: 0 0 2rem 0;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .hero__content {
+    padding: 3rem 0;
+  }
+
+  .hero__content-wrapper {
+    max-width: 1000px;
+  }
+}
