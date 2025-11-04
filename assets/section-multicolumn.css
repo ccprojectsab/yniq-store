@@ -231,3 +231,75 @@
     display: list-item;
   }
 }
+
+/* Multicolumn - Overlay Mode */
+.multicolumn-card--overlay {
+  position: relative;
+}
+
+.multicolumn-card__media-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.multicolumn-card__overlay-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  color: white;
+  z-index: 2;
+}
+
+.multicolumn-card__overlay-info--top {
+  top: 0;
+}
+
+.multicolumn-card__overlay-info--center {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.multicolumn-card__overlay-info--bottom {
+  bottom: 0;
+}
+
+.multicolumn-card__overlay-info h3 {
+  color: white;
+  margin: 0 0 0.5rem 0;
+}
+
+.multicolumn-card__overlay-info .rte {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.multicolumn-card__overlay-info .link {
+  color: white;
+}
+
+/* Multicolumn - Gradient Overlay */
+.multicolumn-card__media-wrapper--gradient::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Multicolumn - Video Support */
+.multicolumn-card__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.media .multicolumn-card__video {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

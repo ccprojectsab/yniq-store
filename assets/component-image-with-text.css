@@ -415,3 +415,21 @@
     row-gap: var(--grid-desktop-vertical-spacing);
   }
 }
+
+/* Image With Text - Video Support */
+.image-with-text__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Image With Text - Full Height Mode */
+.image-with-text__media--full-height {
+  min-height: 100vh;
+}
+
+@media screen and (max-width: 749px) {
+  .image-with-text__media--full-height {
+    min-height: 50vh;
+  }
+}

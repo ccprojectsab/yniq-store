@@ -1,0 +1,24 @@
+.section-heading {
+  width: 100%;
+}
+
+.section-heading__wrapper {
+  width: 100%;
+}
+
+.section-heading__wrapper--left {
+  text-align: left;
+}
+
+.section-heading__wrapper--center {
+  text-align: center;
+}
+
+.section-heading__wrapper--right {
+  text-align: right;
+}
+
+.section-heading__title {
+  margin: 0;
+  word-wrap: break-word;
+}

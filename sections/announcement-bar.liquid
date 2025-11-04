@@ -18,8 +18,21 @@
   {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 {% endif %}
 
+{%- if section.settings.show_close_icon or section.settings.sticky_announcement_type != 'none' -%}
+  <script src="{{ 'announcement-bar.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- liquid
+  assign wrapper_tag = 'div'
+  if section.settings.sticky_announcement_type != 'none'
+    assign wrapper_tag = 'sticky-announcement-bar'
+  endif
+-%}
+
+<{{ wrapper_tag }} {% if wrapper_tag == 'sticky-announcement-bar' %}data-sticky-type="{{ section.settings.sticky_announcement_type }}"{% endif %} class="announcement-bar-sticky-wrapper">
 <div
-  class="utility-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}"
+  class="utility-bar color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator and section.blocks.size > 0 %} utility-bar--bottom-border{% elsif section.settings.show_line_separator and section.settings.show_social and social_icons%} utility-bar--bottom-border-social-only{% endif %}{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header-localization{% endif %}{% if section.settings.sticky_announcement_type != 'none' %} announcement-bar--sticky{% endif %}"
+  {% if section.settings.show_close_icon %}data-announcement-bar-dismissible{% endif %}
 >
   <div class="page-width utility-bar__grid{% if announcement_bar and language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--3-col{% elsif language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--2-col{% endif %}">
     {%- if section.settings.show_social and social_icons -%}
@@ -136,6 +149,22 @@
         </style>
       {%- endif -%}
     {%- endif -%}
+    {%- if section.settings.show_close_icon -%}
+      <button
+        type="button"
+        class="announcement-bar__close"
+        aria-label="Close announcement"
+      >
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          class="icon icon-close"
+          viewBox="0 0 18 17"
+        >
+          <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" />
+        </svg>
+      </button>
+    {%- endif -%}
     <div class="localization-wrapper">
       {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
         <localization-form class="small-hide medium-hide">
@@ -161,6 +190,7 @@
     </div>
   </div>
 </div>
+</{{ wrapper_tag }}>
 
 {% schema %}
 {
@@ -198,6 +228,34 @@
       "id": "show_line_separator",
       "default": true,
       "label": "t:sections.header.settings.show_line_separator.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_close_icon",
+      "default": false,
+      "label": "Show close button",
+      "info": "Allow users to dismiss the announcement bar"
+    },
+    {
+      "type": "select",
+      "id": "sticky_announcement_type",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "on-scroll-up",
+          "label": "On scroll up"
+        },
+        {
+          "value": "always",
+          "label": "Always"
+        }
+      ],
+      "default": "none",
+      "label": "Sticky announcement bar",
+      "info": "Choose when to keep the announcement bar visible while scrolling"
     },
     {
       "type": "header",

@@ -2309,6 +2309,80 @@ input[type='checkbox'] {
   }
 }
 
+/* Announcement Bar - Close Button */
+.utility-bar__grid {
+  position: relative;
+}
+
+.announcement-bar__close {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(var(--color-foreground));
+  min-width: 44px;
+  min-height: 44px;
+  z-index: 10;
+}
+
+.announcement-bar__close .icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: currentColor;
+}
+
+.announcement-bar__close:hover {
+  opacity: 0.7;
+}
+
+.announcement-bar__close:focus-visible {
+  outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
+  outline-offset: 0.3rem;
+  box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
+}
+
+@media screen and (max-width: 749px) {
+  .announcement-bar__close {
+    right: -1rem;
+  }
+}
+
+/* Announcement Bar - Sticky Positioning */
+.announcement-bar-sticky-wrapper {
+  display: block;
+  position: relative;
+}
+
+/* Ensure announcement bar section is positioned correctly within header group */
+.announcement-bar-section {
+  position: relative;
+  z-index: 5;
+}
+
+.announcement-bar-section-sticky {
+  position: sticky;
+  top: 0;
+}
+
+.announcement-bar-section-hidden {
+  top: calc(-1 * var(--announcement-bar-height));
+}
+
+.announcement-bar-section.animate {
+  transition: top 0.15s ease-out;
+}
+
+.utility-bar {
+  position: relative;
+}
+
 /* section-header */
 .section-header.shopify-section-group-header-group {
   z-index: 3;
@@ -2319,8 +2393,24 @@ input[type='checkbox'] {
   top: 0;
 }
 
+/* When announcement bar is sticky and visible, offset header below it */
+.announcement-bar-section-sticky:not(.announcement-bar-section-hidden) ~ .section-header.shopify-section-header-sticky:not(.shopify-section-header-hidden) {
+  top: var(--announcement-bar-height, 0px);
+}
+
+/* When announcement bar is hidden or not sticky, header uses default position */
+.announcement-bar-section-hidden ~ .section-header.shopify-section-header-sticky:not(.shopify-section-header-hidden) {
+  top: 0;
+}
+
+/* Header hidden state - must account for announcement bar */
 .shopify-section-header-hidden {
   top: calc(-1 * var(--header-height));
+}
+
+/* When both announcement bar and header are visible and sticky */
+.announcement-bar-section-sticky:not(.announcement-bar-section-hidden) ~ .section-header.shopify-section-header-hidden {
+  top: calc(var(--announcement-bar-height, 0px) - var(--header-height));
 }
 
 .shopify-section-header-hidden.menu-open {
