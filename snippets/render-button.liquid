@@ -1,0 +1,112 @@
+{% comment %}
+  ============================================================================
+  RENDER BUTTON - Reusable Button Component
+  ============================================================================
+
+  A reusable snippet for rendering buttons consistently across all sections
+  using the design system button classes.
+
+  PARAMETERS:
+  -----------
+  button_label      (required) - The button text
+  button_link       (optional) - The button URL (default: '#')
+  button_style      (optional) - Button type: 'primary', 'secondary', or 'tertiary' (default: 'primary')
+  button_size       (optional) - Button size: 'sm', 'lg' (default: medium, no class needed)
+  full_width        (optional) - true/false for full-width button
+  icon_svg          (optional) - SVG code for icon
+  icon_position     (optional) - 'left' or 'right' (default: 'left')
+  additional_classes (optional) - Extra CSS classes to add
+  aria_label        (optional) - Accessible label for screen readers
+
+  USAGE:
+  ------
+  Basic Button:
+  {% render 'render-button',
+    button_label: 'Shop Now',
+    button_link: '/collections/all',
+    button_style: 'primary'
+  %}
+
+  With Size and Full Width:
+  {% render 'render-button',
+    button_label: 'Add to Cart',
+    button_link: '#',
+    button_style: 'primary',
+    button_size: 'lg',
+    full_width: true
+  %}
+
+  With Icon:
+  {% render 'render-button',
+    button_label: 'Next',
+    button_link: '/next-page',
+    button_style: 'secondary',
+    icon_svg: '<svg>...</svg>',
+    icon_position: 'right'
+  %}
+
+  From Section Settings:
+  {% render 'render-button',
+    button_label: block.settings.button_label_1,
+    button_link: block.settings.button_link_1,
+    button_style: block.settings.button_style_1
+  %}
+
+  ============================================================================
+{% endcomment %}
+
+{%- liquid
+  # Default values
+  assign btn_style = button_style | default: 'primary'
+  assign btn_link = button_link | default: '#'
+  assign btn_size = button_size | default: ''
+  assign icon_pos = icon_position | default: 'left'
+
+  # Build class string
+  assign btn_classes = 'btn btn--' | append: btn_style
+
+  # Add size class if specified
+  if btn_size != blank and btn_size != 'md'
+    assign btn_classes = btn_classes | append: ' btn--' | append: btn_size
+  endif
+
+  # Add full-width class if specified
+  if full_width
+    assign btn_classes = btn_classes | append: ' btn--full-width'
+  endif
+
+  # Add additional classes if provided
+  if additional_classes != blank
+    assign btn_classes = btn_classes | append: ' ' | append: additional_classes
+  endif
+
+  # Determine if button has icon
+  assign has_icon = false
+  if icon_svg != blank
+    assign has_icon = true
+  endif
+-%}
+
+{%- if button_label != blank -%}
+  <a
+    href="{{ btn_link }}"
+    class="{{ btn_classes }}"
+    {% if btn_link == blank or btn_link == '#' %}
+      role="link"
+      aria-disabled="true"
+    {% endif %}
+    {% if aria_label != blank %}
+      aria-label="{{ aria_label }}"
+    {% endif %}
+  >
+    {%- if has_icon and icon_pos == 'left' -%}
+      <span class="btn__icon">{{ icon_svg }}</span>
+    {%- endif -%}
+
+    <span>{{ button_label | escape }}</span>
+
+    {%- if has_icon and icon_pos == 'right' -%}
+      <span class="btn__icon">{{ icon_svg }}</span>
+    {%- endif -%}
+  </a>
+{%- endif -%}
