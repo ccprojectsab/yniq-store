@@ -94,15 +94,11 @@
 
             {%- if block.settings.cta_text != blank -%}
               <div class="hero__cta">
-                <a
-                  href="{{ block.settings.cta_link | default: '#' }}"
-                  class="button button--primary"
-                  {% if block.settings.cta_link == blank %}
-                    role="link" aria-disabled="true"
-                  {% endif %}
-                >
-                  {{ block.settings.cta_text | escape }}
-                </a>
+                {%- render 'render-button',
+                  button_label: block.settings.cta_text,
+                  button_link: block.settings.cta_link,
+                  button_style: block.settings.cta_style
+                -%}
               </div>
             {%- endif -%}
           </div>
@@ -342,6 +338,26 @@
           "type": "url",
           "id": "cta_link",
           "label": "CTA link"
+        },
+        {
+          "type": "select",
+          "id": "cta_style",
+          "label": "CTA Button Style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Primary"
+            },
+            {
+              "value": "secondary",
+              "label": "Secondary (Outlined)"
+            },
+            {
+              "value": "tertiary",
+              "label": "Tertiary (Text)"
+            }
+          ],
+          "default": "primary"
         }
       ]
     }

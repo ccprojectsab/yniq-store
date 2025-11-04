@@ -212,16 +212,11 @@
     </slider-component>
     <div class="center">
       {%- if section.settings.button_label != blank -%}
-        <a
-          class="button button--primary"
-          {% if section.settings.button_link == blank %}
-            role="link" aria-disabled="true"
-          {% else %}
-            href="{{ section.settings.button_link }}"
-          {% endif %}
-        >
-          {{ section.settings.button_label | escape }}
-        </a>
+        {%- render 'render-button',
+          button_label: section.settings.button_label,
+          button_link: section.settings.button_link,
+          button_style: section.settings.button_style
+        -%}
       {%- endif -%}
     </div>
   </div>
@@ -268,7 +263,27 @@
       "type": "url",
       "id": "button_link",
       "label": "t:sections.multicolumn.settings.button_link.label"
-    },    
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary (Outlined)"
+        },
+        {
+          "value": "tertiary",
+          "label": "Tertiary (Text)"
+        }
+      ],
+      "default": "primary"
+    },
     {
       "type": "header",
       "content": "t:sections.multicolumn.settings.header_layout.content"
