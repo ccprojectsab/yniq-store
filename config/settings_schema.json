@@ -1451,5 +1451,138 @@
         "default": "scheme-1"
       }
     ]
+  },
+  {
+    "name": "Design System",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Button Styles"
+      },
+      {
+        "type": "paragraph",
+        "content": "Customize button colors and appearance. These settings sync with your design system tokens."
+      },
+      {
+        "type": "header",
+        "content": "Primary Button"
+      },
+      {
+        "type": "color",
+        "id": "ds_btn_primary_bg",
+        "label": "Primary Button Background",
+        "default": "#141212"
+      },
+      {
+        "type": "color",
+        "id": "ds_btn_primary_text",
+        "label": "Primary Button Text",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "ds_btn_primary_hover_bg",
+        "label": "Primary Button Hover Background",
+        "default": "#545454"
+      },
+      {
+        "type": "header",
+        "content": "Secondary Button (Outlined)"
+      },
+      {
+        "type": "color",
+        "id": "ds_btn_secondary_text",
+        "label": "Secondary Button Text",
+        "default": "#141212"
+      },
+      {
+        "type": "color",
+        "id": "ds_btn_secondary_border",
+        "label": "Secondary Button Border",
+        "default": "#141212"
+      },
+      {
+        "type": "color",
+        "id": "ds_btn_secondary_hover_bg",
+        "label": "Secondary Button Hover Background",
+        "default": "#C3A572"
+      },
+      {
+        "type": "color",
+        "id": "ds_btn_secondary_hover_text",
+        "label": "Secondary Button Hover Text",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "header",
+        "content": "Tertiary Button (Text Only)"
+      },
+      {
+        "type": "color",
+        "id": "ds_btn_tertiary_text",
+        "label": "Tertiary Button Text",
+        "default": "#141212"
+      },
+      {
+        "type": "color",
+        "id": "ds_btn_tertiary_hover_bg",
+        "label": "Tertiary Button Hover Background",
+        "default": "#C3A572"
+      },
+      {
+        "type": "color",
+        "id": "ds_btn_tertiary_hover_text",
+        "label": "Tertiary Button Hover Text",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "header",
+        "content": "Button Appearance"
+      },
+      {
+        "type": "select",
+        "id": "ds_btn_text_transform",
+        "label": "Button Text Transform",
+        "options": [
+          {
+            "value": "uppercase",
+            "label": "Uppercase"
+          },
+          {
+            "value": "lowercase",
+            "label": "Lowercase"
+          },
+          {
+            "value": "capitalize",
+            "label": "Capitalize"
+          },
+          {
+            "value": "none",
+            "label": "None"
+          }
+        ],
+        "default": "uppercase"
+      },
+      {
+        "type": "range",
+        "id": "ds_btn_border_radius",
+        "min": 0,
+        "max": 50,
+        "step": 2,
+        "unit": "px",
+        "label": "Button Border Radius",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "ds_btn_transition_duration",
+        "min": 100,
+        "max": 500,
+        "step": 50,
+        "unit": "ms",
+        "label": "Button Transition Speed",
+        "default": 250
+      }
+    ]
   }
 ]

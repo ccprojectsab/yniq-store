@@ -1,0 +1,289 @@
+{% comment %}
+  ============================================================================
+  DESIGN SYSTEM - BUTTON DOCUMENTATION
+  ============================================================================
+
+  This snippet demonstrates all button variants and how to use them.
+
+  USAGE:
+  Add this to any template to view button examples:
+  {% render 'ds-button-docs' %}
+
+  Or create a page template (templates/page.button-docs.liquid):
+  {% render 'ds-button-docs' %}
+
+  Then create a page in Shopify admin using this template.
+
+  ============================================================================
+{% endcomment %}
+
+<style>
+  .ds-docs {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    font-family: var(--ds-font-body);
+  }
+
+  .ds-docs__section {
+    margin-bottom: 60px;
+  }
+
+  .ds-docs__title {
+    font-family: var(--ds-font-heading);
+    font-size: var(--ds-font-size-h2);
+    margin-bottom: 8px;
+    color: var(--ds-color-black-100);
+  }
+
+  .ds-docs__subtitle {
+    font-size: var(--ds-font-size-body-medium);
+    color: var(--ds-color-grey-500);
+    margin-bottom: 24px;
+  }
+
+  .ds-docs__example {
+    background: var(--ds-color-white-200);
+    padding: 32px;
+    border-radius: var(--ds-border-radius-md);
+    margin-bottom: 16px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .ds-docs__code {
+    background: var(--ds-color-black-100);
+    color: var(--ds-color-white-100);
+    padding: 16px;
+    border-radius: var(--ds-border-radius-md);
+    overflow-x: auto;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  .ds-docs__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+  }
+</style>
+
+<div class="ds-docs">
+
+  <h1 class="ds-docs__title" style="font-size: var(--ds-font-size-h1); margin-bottom: 16px;">
+    Button Component Documentation
+  </h1>
+  <p class="ds-docs__subtitle">
+    A flexible, configurable button system using design tokens.
+  </p>
+
+  <!-- PRIMARY BUTTONS -->
+  <section class="ds-docs__section">
+    <h2 class="ds-docs__title">Primary Buttons</h2>
+    <p class="ds-docs__subtitle">High-priority actions across the interface</p>
+
+    <div class="ds-docs__example">
+      <button class="btn btn--primary">Primary Button</button>
+      <button class="btn btn--primary btn--sm">Small Primary</button>
+      <button class="btn btn--primary btn--lg">Large Primary</button>
+      <button class="btn btn--primary" disabled>Disabled</button>
+    </div>
+
+    <div class="ds-docs__code">&lt;button class="btn btn--primary"&gt;Primary Button&lt;/button&gt;</div>
+  </section>
+
+  <!-- SECONDARY BUTTONS -->
+  <section class="ds-docs__section">
+    <h2 class="ds-docs__title">Secondary Buttons (Outlined)</h2>
+    <p class="ds-docs__subtitle">Medium-priority actions, alternatives to primary</p>
+
+    <div class="ds-docs__example">
+      <button class="btn btn--secondary">Secondary Button</button>
+      <button class="btn btn--secondary btn--sm">Small Secondary</button>
+      <button class="btn btn--secondary btn--lg">Large Secondary</button>
+      <button class="btn btn--secondary" disabled>Disabled</button>
+    </div>
+
+    <div class="ds-docs__code">&lt;button class="btn btn--secondary"&gt;Secondary Button&lt;/button&gt;</div>
+  </section>
+
+  <!-- TERTIARY BUTTONS -->
+  <section class="ds-docs__section">
+    <h2 class="ds-docs__title">Tertiary Buttons (Text Only)</h2>
+    <p class="ds-docs__subtitle">Low-priority actions, text links</p>
+
+    <div class="ds-docs__example">
+      <button class="btn btn--tertiary">Tertiary Button</button>
+      <button class="btn btn--tertiary btn--sm">Small Tertiary</button>
+      <button class="btn btn--tertiary btn--lg">Large Tertiary</button>
+      <button class="btn btn--tertiary" disabled>Disabled</button>
+    </div>
+
+    <div class="ds-docs__code">&lt;button class="btn btn--tertiary"&gt;Tertiary Button&lt;/button&gt;</div>
+  </section>
+
+  <!-- BUTTONS WITH ICONS -->
+  <section class="ds-docs__section">
+    <h2 class="ds-docs__title">Buttons with Icons</h2>
+    <p class="ds-docs__subtitle">Add icons to provide visual context</p>
+
+    <div class="ds-docs__example">
+      <button class="btn btn--primary">
+        <svg class="btn__icon" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"/>
+        </svg>
+        <span>Icon Left</span>
+      </button>
+
+      <button class="btn btn--secondary">
+        <span>Icon Right</span>
+        <svg class="btn__icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+        </svg>
+      </button>
+
+      <button class="btn btn--primary btn--icon-only" aria-label="Add item">
+        <svg class="btn__icon" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="ds-docs__code">&lt;button class="btn btn--primary"&gt;
+  &lt;svg class="btn__icon"&gt;...&lt;/svg&gt;
+  &lt;span&gt;Icon Left&lt;/span&gt;
+&lt;/button&gt;</div>
+  </section>
+
+  <!-- FULL WIDTH BUTTONS -->
+  <section class="ds-docs__section">
+    <h2 class="ds-docs__title">Full Width Buttons</h2>
+    <p class="ds-docs__subtitle">Buttons that span the full container width</p>
+
+    <div class="ds-docs__example" style="display: block;">
+      <button class="btn btn--primary btn--full-width" style="margin-bottom: 12px;">Primary Full Width</button>
+      <button class="btn btn--secondary btn--full-width" style="margin-bottom: 12px;">Secondary Full Width</button>
+      <button class="btn btn--tertiary btn--full-width">Tertiary Full Width</button>
+    </div>
+
+    <div class="ds-docs__code">&lt;button class="btn btn--primary btn--full-width"&gt;Full Width Button&lt;/button&gt;</div>
+  </section>
+
+  <!-- LOADING STATE -->
+  <section class="ds-docs__section">
+    <h2 class="ds-docs__title">Loading State</h2>
+    <p class="ds-docs__subtitle">Indicate when an action is processing</p>
+
+    <div class="ds-docs__example">
+      <button class="btn btn--primary btn--loading">Processing...</button>
+      <button class="btn btn--secondary btn--loading">Loading...</button>
+    </div>
+
+    <div class="ds-docs__code">&lt;button class="btn btn--primary btn--loading"&gt;Processing...&lt;/button&gt;</div>
+  </section>
+
+  <!-- BUTTON GROUPS -->
+  <section class="ds-docs__section">
+    <h2 class="ds-docs__title">Button Groups</h2>
+    <p class="ds-docs__subtitle">Multiple buttons side by side</p>
+
+    <div class="ds-docs__example">
+      <div class="btn-group">
+        <button class="btn btn--primary">Save Changes</button>
+        <button class="btn btn--secondary">Cancel</button>
+        <button class="btn btn--tertiary">Reset</button>
+      </div>
+    </div>
+
+    <div class="ds-docs__code">&lt;div class="btn-group"&gt;
+  &lt;button class="btn btn--primary"&gt;Save Changes&lt;/button&gt;
+  &lt;button class="btn btn--secondary"&gt;Cancel&lt;/button&gt;
+&lt;/div&gt;</div>
+  </section>
+
+  <!-- BUTTONS AS LINKS -->
+  <section class="ds-docs__section">
+    <h2 class="ds-docs__title">Buttons as Links</h2>
+    <p class="ds-docs__subtitle">Style links to look like buttons</p>
+
+    <div class="ds-docs__example">
+      <a href="#" class="btn btn--primary">Link as Primary</a>
+      <a href="#" class="btn btn--secondary">Link as Secondary</a>
+      <a href="#" class="btn btn--tertiary">Link as Tertiary</a>
+    </div>
+
+    <div class="ds-docs__code">&lt;a href="/shop" class="btn btn--primary"&gt;Shop Now&lt;/a&gt;</div>
+  </section>
+
+  <!-- ALL COMBINATIONS GRID -->
+  <section class="ds-docs__section">
+    <h2 class="ds-docs__title">All Combinations</h2>
+    <p class="ds-docs__subtitle">Visual reference for all button variants</p>
+
+    <div class="ds-docs__grid">
+      <div>
+        <h3 style="margin-bottom: 12px; font-size: var(--ds-font-size-body-medium);">Primary</h3>
+        <button class="btn btn--primary btn--sm" style="margin-bottom: 8px; width: 100%;">Small</button>
+        <button class="btn btn--primary" style="margin-bottom: 8px; width: 100%;">Medium</button>
+        <button class="btn btn--primary btn--lg" style="width: 100%;">Large</button>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom: 12px; font-size: var(--ds-font-size-body-medium);">Secondary</h3>
+        <button class="btn btn--secondary btn--sm" style="margin-bottom: 8px; width: 100%;">Small</button>
+        <button class="btn btn--secondary" style="margin-bottom: 8px; width: 100%;">Medium</button>
+        <button class="btn btn--secondary btn--lg" style="width: 100%;">Large</button>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom: 12px; font-size: var(--ds-font-size-body-medium);">Tertiary</h3>
+        <button class="btn btn--tertiary btn--sm" style="margin-bottom: 8px; width: 100%;">Small</button>
+        <button class="btn btn--tertiary" style="margin-bottom: 8px; width: 100%;">Medium</button>
+        <button class="btn btn--tertiary btn--lg" style="width: 100%;">Large</button>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom: 12px; font-size: var(--ds-font-size-body-medium);">Disabled</h3>
+        <button class="btn btn--primary btn--sm" disabled style="margin-bottom: 8px; width: 100%;">Primary</button>
+        <button class="btn btn--secondary" disabled style="margin-bottom: 8px; width: 100%;">Secondary</button>
+        <button class="btn btn--tertiary btn--lg" disabled style="width: 100%;">Tertiary</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUSTOMIZATION GUIDE -->
+  <section class="ds-docs__section">
+    <h2 class="ds-docs__title">Customization Guide</h2>
+    <p class="ds-docs__subtitle">How to adapt this button system for your project</p>
+
+    <div style="background: var(--ds-color-white-200); padding: 24px; border-radius: var(--ds-border-radius-md); line-height: 1.8;">
+      <h3 style="margin-bottom: 12px;">Quick Customization Steps:</h3>
+      <ol style="padding-left: 20px;">
+        <li><strong>Open <code>assets/ds-config.css</code></strong> - This is your central configuration file</li>
+        <li><strong>Update button tokens</strong> - Search for "BUTTON SYSTEM TOKENS" section</li>
+        <li><strong>Modify colors</strong> - Change <code>--ds-btn-primary-bg</code>, <code>--ds-btn-secondary-text</code>, etc.</li>
+        <li><strong>Adjust spacing</strong> - Update padding variables for different button sizes</li>
+        <li><strong>Change typography</strong> - Modify font-size, font-weight, text-transform</li>
+        <li><strong>Save and test</strong> - Changes apply automatically to all buttons</li>
+      </ol>
+
+      <h3 style="margin-top: 24px; margin-bottom: 12px;">Adding a New Button Type:</h3>
+      <ol style="padding-left: 20px;">
+        <li>Add variables in <code>ds-config.css</code> (e.g., <code>--ds-btn-danger-bg</code>)</li>
+        <li>Create the class in <code>ds-buttons.css</code> (e.g., <code>.btn--danger</code>)</li>
+        <li>Follow the same pattern as primary/secondary buttons</li>
+        <li>Add documentation example here</li>
+      </ol>
+
+      <h3 style="margin-top: 24px; margin-bottom: 12px;">Using in Shopify Theme:</h3>
+      <p>Add to <code>theme.liquid</code> in the <code>&lt;head&gt;</code> section:</p>
+      <pre style="background: var(--ds-color-black-100); color: var(--ds-color-white-100); padding: 12px; border-radius: 4px; overflow-x: auto; margin-top: 8px;">{{ 'ds-config.css' | asset_url | stylesheet_tag }}
+{{ 'ds-buttons.css' | asset_url | stylesheet_tag }}</pre>
+    </div>
+  </section>
+
+</div>
