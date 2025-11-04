@@ -1,0 +1,82 @@
+{% comment %}
+  ============================================================================
+  DESIGN SYSTEM - SETTINGS SYNC
+  ============================================================================
+
+  This snippet syncs Shopify Theme Settings with CSS custom properties.
+
+  USAGE:
+  Add this snippet to your theme.liquid in the <head> section:
+  {% render 'ds-settings-sync' %}
+
+  Make sure it's placed AFTER the ds-config.css stylesheet is loaded.
+
+  This will override the default values in ds-config.css with values
+  configured in the Shopify admin Theme Settings > Design System.
+
+  ============================================================================
+{% endcomment %}
+
+<style>
+:root {
+  /* Primary Button Colors (from Theme Settings) */
+  {%- if settings.ds_btn_primary_bg -%}
+    --ds-btn-primary-bg: {{ settings.ds_btn_primary_bg }};
+    --ds-btn-primary-border: {{ settings.ds_btn_primary_bg }};
+  {%- endif -%}
+
+  {%- if settings.ds_btn_primary_text -%}
+    --ds-btn-primary-text: {{ settings.ds_btn_primary_text }};
+  {%- endif -%}
+
+  {%- if settings.ds_btn_primary_hover_bg -%}
+    --ds-btn-primary-hover-bg: {{ settings.ds_btn_primary_hover_bg }};
+    --ds-btn-primary-hover-text: {{ settings.ds_btn_primary_text }};
+    --ds-btn-primary-hover-border: {{ settings.ds_btn_primary_hover_bg }};
+  {%- endif -%}
+
+  /* Secondary Button Colors (from Theme Settings) */
+  {%- if settings.ds_btn_secondary_text -%}
+    --ds-btn-secondary-text: {{ settings.ds_btn_secondary_text }};
+  {%- endif -%}
+
+  {%- if settings.ds_btn_secondary_border -%}
+    --ds-btn-secondary-border: {{ settings.ds_btn_secondary_border }};
+  {%- endif -%}
+
+  {%- if settings.ds_btn_secondary_hover_bg -%}
+    --ds-btn-secondary-hover-bg: {{ settings.ds_btn_secondary_hover_bg }};
+    --ds-btn-secondary-hover-border: {{ settings.ds_btn_secondary_hover_bg }};
+  {%- endif -%}
+
+  {%- if settings.ds_btn_secondary_hover_text -%}
+    --ds-btn-secondary-hover-text: {{ settings.ds_btn_secondary_hover_text }};
+  {%- endif -%}
+
+  /* Tertiary Button Colors (from Theme Settings) */
+  {%- if settings.ds_btn_tertiary_text -%}
+    --ds-btn-tertiary-text: {{ settings.ds_btn_tertiary_text }};
+  {%- endif -%}
+
+  {%- if settings.ds_btn_tertiary_hover_bg -%}
+    --ds-btn-tertiary-hover-bg: {{ settings.ds_btn_tertiary_hover_bg }};
+  {%- endif -%}
+
+  {%- if settings.ds_btn_tertiary_hover_text -%}
+    --ds-btn-tertiary-hover-text: {{ settings.ds_btn_tertiary_hover_text }};
+  {%- endif -%}
+
+  /* Button Appearance (from Theme Settings) */
+  {%- if settings.ds_btn_text_transform -%}
+    --ds-btn-text-transform: {{ settings.ds_btn_text_transform }};
+  {%- endif -%}
+
+  {%- if settings.ds_btn_border_radius -%}
+    --ds-btn-border-radius: {{ settings.ds_btn_border_radius }}px;
+  {%- endif -%}
+
+  {%- if settings.ds_btn_transition_duration -%}
+    --ds-btn-transition-duration: {{ settings.ds_btn_transition_duration }}ms;
+  {%- endif -%}
+}
+</style>

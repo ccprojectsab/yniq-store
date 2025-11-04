@@ -1,0 +1,437 @@
+/*
+ * ============================================================================
+ * DESIGN SYSTEM - BUTTON COMPONENTS
+ * ============================================================================
+ *
+ * A flexible, configurable button system that uses design tokens from
+ * ds-config.css for easy customization across projects.
+ *
+ * REQUIREMENTS:
+ * - Import ds-config.css BEFORE this file
+ *
+ * BUTTON TYPES:
+ * - Primary: .btn--primary
+ * - Secondary: .btn--secondary (outlined)
+ * - Tertiary: .btn--tertiary (text-only)
+ *
+ * MODIFIERS:
+ * - Sizes: .btn--sm, .btn--lg (default is medium)
+ * - Full width: .btn--full-width
+ * - With icon: .btn--icon-left, .btn--icon-right, .btn--icon-only
+ * - States: .btn--disabled, .btn--loading
+ *
+ * USAGE:
+ * <button class="btn btn--primary">Button Text</button>
+ * <a href="#" class="btn btn--secondary btn--full-width">Link Button</a>
+ * <button class="btn btn--tertiary btn--icon-left">
+ *   <svg class="btn__icon">...</svg>
+ *   <span>With Icon</span>
+ * </button>
+ *
+ * ============================================================================
+ */
+
+
+/* ==========================================================================
+ * BASE BUTTON STYLES
+ * ========================================================================== */
+
+.btn {
+  /* Reset */
+  margin: 0;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+
+  /* Display */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-btn-icon-gap);
+
+  /* Typography */
+  font-family: var(--ds-font-body);
+  font-size: var(--ds-btn-font-size-md);
+  font-weight: var(--ds-btn-font-weight);
+  letter-spacing: var(--ds-btn-letter-spacing);
+  text-transform: var(--ds-btn-text-transform);
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+
+  /* Spacing */
+  padding: var(--ds-btn-padding-y-md) var(--ds-btn-padding-x-md);
+
+  /* Appearance */
+  border: var(--ds-btn-border-width) solid transparent;
+  border-radius: var(--ds-btn-border-radius);
+
+  /* Transitions */
+  transition-property: background-color, border-color, color, transform, box-shadow;
+  transition-duration: var(--ds-btn-transition-duration);
+  transition-timing-function: var(--ds-btn-transition-timing);
+
+  /* Accessibility */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  vertical-align: middle;
+}
+
+/* Focus state for accessibility */
+.btn:focus-visible {
+  outline: 2px solid var(--ds-color-primary);
+  outline-offset: 2px;
+}
+
+/* Active state */
+.btn:active:not(:disabled):not(.btn--disabled) {
+  transform: translateY(1px);
+}
+
+
+/* ==========================================================================
+ * BUTTON ICON SUPPORT
+ * ========================================================================== */
+
+.btn__icon {
+  width: var(--ds-btn-icon-size);
+  height: var(--ds-btn-icon-size);
+  flex-shrink: 0;
+  display: inline-block;
+  fill: currentColor;
+}
+
+/* Icon-only buttons */
+.btn--icon-only {
+  padding: var(--ds-btn-padding-y-md);
+  aspect-ratio: 1;
+}
+
+.btn--icon-only.btn--sm {
+  padding: var(--ds-btn-padding-y-sm);
+}
+
+.btn--icon-only.btn--lg {
+  padding: var(--ds-btn-padding-y-lg);
+}
+
+
+/* ==========================================================================
+ * PRIMARY BUTTON
+ * ========================================================================== */
+
+.btn--primary {
+  background-color: var(--ds-btn-primary-bg);
+  color: var(--ds-btn-primary-text);
+  border-color: var(--ds-btn-primary-border);
+}
+
+.btn--primary:hover:not(:disabled):not(.btn--disabled) {
+  background-color: var(--ds-btn-primary-hover-bg);
+  color: var(--ds-btn-primary-hover-text);
+  border-color: var(--ds-btn-primary-hover-border);
+}
+
+.btn--primary:disabled,
+.btn--primary.btn--disabled {
+  background-color: var(--ds-btn-primary-disabled-bg);
+  color: var(--ds-btn-primary-disabled-text);
+  border-color: var(--ds-btn-primary-disabled-border);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+
+/* ==========================================================================
+ * SECONDARY BUTTON (Outlined)
+ * ========================================================================== */
+
+.btn--secondary {
+  background-color: var(--ds-btn-secondary-bg);
+  color: var(--ds-btn-secondary-text);
+  border-color: var(--ds-btn-secondary-border);
+}
+
+.btn--secondary:hover:not(:disabled):not(.btn--disabled) {
+  background-color: var(--ds-btn-secondary-hover-bg);
+  color: var(--ds-btn-secondary-hover-text);
+  border-color: var(--ds-btn-secondary-hover-border);
+}
+
+.btn--secondary:disabled,
+.btn--secondary.btn--disabled {
+  background-color: var(--ds-btn-secondary-disabled-bg);
+  color: var(--ds-btn-secondary-disabled-text);
+  border-color: var(--ds-btn-secondary-disabled-border);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+
+/* ==========================================================================
+ * TERTIARY BUTTON (Text Only)
+ * ========================================================================== */
+
+.btn--tertiary {
+  background-color: var(--ds-btn-tertiary-bg);
+  color: var(--ds-btn-tertiary-text);
+  border-color: var(--ds-btn-tertiary-border);
+  text-decoration: none;
+  position: relative;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Optional underline on hover */
+.btn--tertiary::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--ds-btn-transition-duration) var(--ds-btn-transition-timing);
+}
+
+.btn--tertiary:hover:not(:disabled):not(.btn--disabled) {
+  background-color: var(--ds-btn-tertiary-hover-bg);
+  color: var(--ds-btn-tertiary-hover-text);
+  border-color: var(--ds-btn-tertiary-hover-border);
+}
+
+.btn--tertiary:hover:not(:disabled):not(.btn--disabled)::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.btn--tertiary:disabled,
+.btn--tertiary.btn--disabled {
+  background-color: var(--ds-btn-tertiary-disabled-bg);
+  color: var(--ds-btn-tertiary-disabled-text);
+  border-color: var(--ds-btn-tertiary-disabled-border);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.btn--tertiary:disabled::after,
+.btn--tertiary.btn--disabled::after {
+  display: none;
+}
+
+
+/* ==========================================================================
+ * SIZE VARIANTS
+ * ========================================================================== */
+
+.btn--sm {
+  font-size: var(--ds-btn-font-size-sm);
+  padding: var(--ds-btn-padding-y-sm) var(--ds-btn-padding-x-sm);
+}
+
+.btn--sm .btn__icon {
+  width: 16px;
+  height: 16px;
+}
+
+.btn--lg {
+  font-size: var(--ds-btn-font-size-lg);
+  padding: var(--ds-btn-padding-y-lg) var(--ds-btn-padding-x-lg);
+}
+
+.btn--lg .btn__icon {
+  width: 24px;
+  height: 24px;
+}
+
+
+/* ==========================================================================
+ * LAYOUT MODIFIERS
+ * ========================================================================== */
+
+/* Full-width button */
+.btn--full-width {
+  display: flex;
+  width: 100%;
+}
+
+/* Button group - place buttons side by side */
+.btn-group {
+  display: flex;
+  gap: var(--ds-space-sm);
+  flex-wrap: wrap;
+}
+
+.btn-group .btn {
+  flex: 0 1 auto;
+}
+
+
+/* ==========================================================================
+ * LOADING STATE
+ * ========================================================================== */
+
+.btn--loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+  cursor: wait;
+}
+
+.btn--loading::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 50%;
+  left: 50%;
+  margin-left: -8px;
+  margin-top: -8px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: btn-spin 0.6s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes btn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* ==========================================================================
+ * ACCESSIBILITY HELPERS
+ * ========================================================================== */
+
+/* Screen reader only text */
+.btn__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+
+  .btn--loading::after {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+
+/* ==========================================================================
+ * MOBILE RESPONSIVE
+ * ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Make buttons easier to tap on mobile */
+  .btn {
+    min-height: 44px; /* Minimum touch target size */
+  }
+
+  /* Optional: Make all buttons full-width on mobile */
+  /* Uncomment if needed for your design system */
+  /*
+  .btn {
+    display: flex;
+    width: 100%;
+  }
+  */
+}
+
+
+/* ==========================================================================
+ * CUSTOM BUTTON VARIANTS
+ * ==========================================================================
+ *
+ * Add your own custom button styles below.
+ * Follow the same pattern for consistency.
+ *
+ * Example - Danger Button:
+ *
+ * .btn--danger {
+ *   background-color: var(--ds-color-error);
+ *   color: var(--ds-color-white-100);
+ *   border-color: var(--ds-color-error);
+ * }
+ *
+ * .btn--danger:hover:not(:disabled):not(.btn--disabled) {
+ *   background-color: #CC0000;
+ *   border-color: #CC0000;
+ * }
+ *
+ * ========================================================================== */
+
+
+/* ==========================================================================
+ * USAGE EXAMPLES
+ * ==========================================================================
+ *
+ * Basic Buttons:
+ * --------------
+ * <button class="btn btn--primary">Primary</button>
+ * <button class="btn btn--secondary">Secondary</button>
+ * <button class="btn btn--tertiary">Tertiary</button>
+ *
+ * With Sizes:
+ * -----------
+ * <button class="btn btn--primary btn--sm">Small</button>
+ * <button class="btn btn--primary">Medium (default)</button>
+ * <button class="btn btn--primary btn--lg">Large</button>
+ *
+ * With Icons:
+ * -----------
+ * <button class="btn btn--primary">
+ *   <svg class="btn__icon">...</svg>
+ *   <span>With Icon Left</span>
+ * </button>
+ *
+ * <button class="btn btn--primary">
+ *   <span>With Icon Right</span>
+ *   <svg class="btn__icon">...</svg>
+ * </button>
+ *
+ * <button class="btn btn--primary btn--icon-only" aria-label="Close">
+ *   <svg class="btn__icon">...</svg>
+ * </button>
+ *
+ * Full Width:
+ * -----------
+ * <button class="btn btn--primary btn--full-width">Full Width</button>
+ *
+ * States:
+ * -------
+ * <button class="btn btn--primary" disabled>Disabled</button>
+ * <button class="btn btn--primary btn--loading">Loading</button>
+ *
+ * Button Groups:
+ * --------------
+ * <div class="btn-group">
+ *   <button class="btn btn--primary">Save</button>
+ *   <button class="btn btn--secondary">Cancel</button>
+ * </div>
+ *
+ * As Links:
+ * ---------
+ * <a href="/shop" class="btn btn--primary">Shop Now</a>
+ *
+ * ========================================================================== */
