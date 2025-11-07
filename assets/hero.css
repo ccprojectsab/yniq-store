@@ -16,7 +16,13 @@
 
 /* Section Height */
 .hero--full-viewport {
-  min-height: 100vh;
+  min-height: 86.5vh;
+}
+
+@media screen and (min-width: 750px) {
+  .hero--full-viewport {
+    min-height: 81.7vh;
+  }
 }
 
 .hero--auto {
@@ -117,6 +123,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 0 1.5rem;
+  text-align: center;
 }
 
 /* Content Positioning */
@@ -163,7 +170,13 @@
 
 /* Content Elements */
 .hero__heading {
-  margin: 0 0 1rem 0;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.hero__heading p {
+  margin: 0;
+  padding: 0;
 }
 
 .hero__text {
@@ -172,6 +185,17 @@
 
 .hero__cta {
   margin: 0;
+}
+
+.hero__cta .btn {
+  font-size: var(--ds-font-size-body-tiny);
+  font-weight: var(--ds-font-weight-regular);
+}
+
+@media screen and (min-width: 750px) {
+  .hero__cta .btn {
+    font-size: var(--ds-font-size-body-small);
+  }
 }
 
 /* Carousel Specific Styles */
@@ -279,11 +303,9 @@
     padding: 0 2rem;
   }
 
-  .hero__heading {
-    margin: 0 0 1.5rem 0;
-  }
 
   .hero__text {
+    font-size: var(--ds-font-size-body-large);
     margin: 0 0 2rem 0;
   }
 }
