@@ -1,8 +1,40 @@
-@media screen and (max-width: 989px) {
-  .multicolumn .page-width {
-    padding-left: 0;
-    padding-right: 0;
+/* Section Padding using Design System */
+/* Override any dynamically generated section padding classes */
+.multicolumn [class*="section-"][class*="-padding"] {
+  padding: var(--ds-space-xl) 0 !important; /* 32px top/bottom, 0 left/right on mobile */
+  padding-top: calc(var(--ds-space-xl) * 2) !important; /* 64px top */
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+@media screen and (min-width: 750px) {
+  .multicolumn [class*="section-"][class*="-padding"] {
+    padding: var(--ds-space-xl) !important;
+    padding-top: calc(var(--ds-space-xl) * 2) !important; /* 64px top */
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
+}
+
+/* Override page-width padding in multicolumn - use design system */
+.multicolumn .page-width {
+  max-width: none !important;
+  padding: var(--ds-space-xl) 0 !important; /* 32px top/bottom, 0 left/right on mobile */
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+@media screen and (min-width: 750px) {
+  .multicolumn .page-width {
+    padding: var(--ds-space-xl) !important; /* 32px all sides on desktop */
+  }
+}
+
+/* Override grid spacing variables to use design system */
+.multicolumn {
+  --grid-desktop-horizontal-spacing: 16px;
+  --grid-mobile-horizontal-spacing: 16px;
+  --grid-mobile-vertical-spacing: 12px;
 }
 
 .multicolumn-list__item.center .multicolumn-card__image-wrapper,
@@ -233,15 +265,31 @@
 .multicolumn-card__overlay-info h3 {
   color: white;
   margin: 0 0 0.5rem 0;
+  font-size: var(--ds-font-size-jumbo);
+  font-weight: var(--ds-font-weight-light);
+  text-transform: uppercase;
 }
 
 .multicolumn-card__overlay-info .rte {
   color: white;
   margin-bottom: 1rem;
+  font-weight: var(--ds-font-weight-light);
+  font-size: var(--ds-font-size-body-medium);
 }
 
 .multicolumn-card__overlay-info .link {
   color: white;
+  text-transform: uppercase;
+  font-size: var(--ds-font-size-body-tiny);
+}
+
+.multicolumn-card__overlay-info .link .svg-wrapper {
+  display: none;
+}
+
+.multicolumn-card__overlay-info .link[aria-disabled="true"] {
+  color: #AFAFAF;
+  cursor: not-allowed;
 }
 
 /* Multicolumn - Gradient Overlay */
